@@ -1,0 +1,343 @@
+/* The television picture. Sized in px on purpose: it is laid out at 800 x 600 and then
+   scaled onto the 3D glass (or to the viewport on small screens). */
+
+.crt {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 34px / 30px;
+  background: #050a10;
+  font-size: 17px;
+  line-height: 1.55;
+  color: #f4ecd8;
+  user-select: text;
+}
+
+.crt-picture {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(120% 100% at 50% 0%, rgba(54, 92, 138, 0.42), transparent 62%),
+    linear-gradient(#0c1826, #0a121c);
+  transform-origin: 50% 50%;
+}
+
+/* ---------- on-screen display ---------- */
+
+.crt-osd {
+  flex: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 34px 6px;
+  font-family: var(--font-crt);
+  font-size: 25px;
+  letter-spacing: 0.04em;
+  color: #9fe6b4;
+  text-shadow: 0 0 8px rgba(120, 255, 170, 0.5);
+  white-space: nowrap;
+}
+
+.crt-osd span:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.crt-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 10px 40px 26px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 187, 107, 0.6) transparent;
+  text-shadow: 0 0 1px rgba(255, 240, 210, 0.35);
+  opacity: 0;
+}
+
+.crt-scroll:focus,
+.crt-scroll:focus-visible {
+  outline: none;
+  box-shadow: inset 3px 0 0 rgba(255, 187, 107, 0.55);
+}
+
+.crt[data-phase='sectionOpen'] .crt-scroll {
+  opacity: 1;
+  animation: crt-content-in 0.45s ease-out;
+}
+
+@keyframes crt-content-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+.crt-bar {
+  flex: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 30px 18px;
+  border-top: 1px solid rgba(255, 214, 160, 0.2);
+  background: rgba(0, 0, 0, 0.28);
+}
+
+.crt-button {
+  font-family: var(--font-crt);
+  font-size: 23px;
+  letter-spacing: 0.04em;
+  padding: 3px 14px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 214, 160, 0.4);
+  background: rgba(255, 214, 160, 0.06);
+  color: #f4dcb4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 34%;
+}
+
+.crt-button:hover:not(:disabled) {
+  background: rgba(255, 214, 160, 0.16);
+}
+
+.crt-button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.crt-eject {
+  background: #ffbb6b;
+  border-color: #ffbb6b;
+  color: #1b1208;
+  max-width: none;
+}
+
+.crt-eject:hover:not(:disabled) {
+  background: #ffcd92;
+}
+
+/* ---------- startup sequence ---------- */
+
+.crt-startup {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  display: none;
+  background: #000;
+}
+
+.crt[data-phase='crtStarting'] .crt-startup {
+  display: block;
+  animation: crt-startup-out 1.7s linear forwards;
+}
+
+.crt-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 4px;
+  margin-top: -2px;
+  background: #eaf4ff;
+  box-shadow: 0 0 28px 8px rgba(190, 220, 255, 0.85);
+  transform: scaleX(0);
+  animation: crt-line 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.crt-static {
+  position: absolute;
+  inset: -40px;
+  opacity: 0;
+  background-image:
+    repeating-radial-gradient(circle at 17% 32%, rgba(255, 255, 255, 0.5) 0 1px, transparent 1px 3px),
+    repeating-radial-gradient(circle at 73% 61%, rgba(255, 255, 255, 0.35) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.12) 0 2px, transparent 2px 5px);
+  animation:
+    crt-static-show 1.7s linear forwards,
+    crt-static-jitter 0.12s steps(3) infinite;
+}
+
+.crt-card {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #102a6a;
+  font-family: var(--font-crt);
+  color: #f2f6ff;
+  text-shadow: 3px 0 0 rgba(255, 60, 60, 0.45), -3px 0 0 rgba(60, 200, 255, 0.45);
+  opacity: 0;
+  animation: crt-card 1.7s linear forwards;
+}
+
+.crt-card-play {
+  position: absolute;
+  top: 28px;
+  left: 40px;
+  font-size: 34px;
+}
+
+.crt-card-title {
+  font-size: 84px;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-align: center;
+  padding: 0 30px;
+}
+
+.crt-card-sub {
+  font-size: 30px;
+  opacity: 0.85;
+}
+
+@keyframes crt-line {
+  0% {
+    transform: scaleX(0);
+  }
+  55% {
+    transform: scaleX(1) scaleY(1);
+  }
+  100% {
+    transform: scaleX(1) scaleY(160);
+    opacity: 0.9;
+  }
+}
+
+@keyframes crt-static-show {
+  0%,
+  26% {
+    opacity: 0;
+  }
+  32%,
+  52% {
+    opacity: 0.85;
+  }
+  60%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes crt-static-jitter {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-13px, 9px);
+  }
+  100% {
+    transform: translate(8px, -11px);
+  }
+}
+
+@keyframes crt-card {
+  0%,
+  54% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  58% {
+    opacity: 1;
+    transform: translateY(-22px) skewX(4deg);
+  }
+  64% {
+    transform: translateY(9px) skewX(-2deg);
+  }
+  70%,
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes crt-startup-out {
+  0%,
+  92% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ---------- power off (eject) ---------- */
+
+.crt[data-phase='ejecting'] .crt-picture {
+  animation: crt-off 0.42s cubic-bezier(0.6, 0, 0.9, 0.4) forwards;
+}
+
+.crt[data-phase='ejecting'] {
+  background: #000;
+}
+
+@keyframes crt-off {
+  0% {
+    transform: scale(1, 1);
+    filter: brightness(1);
+  }
+  55% {
+    transform: scale(1, 0.006);
+    filter: brightness(4);
+  }
+  100% {
+    transform: scale(0, 0.004);
+    filter: brightness(8);
+  }
+}
+
+/* ---------- glass: scanlines, vignette, faint flicker ---------- */
+
+.crt-fx {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  border-radius: inherit;
+  background:
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.16) 0 1px, transparent 1px 3px),
+    radial-gradient(120% 120% at 50% 50%, transparent 58%, rgba(0, 0, 0, 0.55) 100%),
+    linear-gradient(125deg, rgba(255, 255, 255, 0.07) 0%, transparent 28%);
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.55);
+  animation: crt-flicker 5s steps(1) infinite;
+}
+
+@keyframes crt-flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  48% {
+    opacity: 0.96;
+  }
+  50% {
+    opacity: 1;
+  }
+  83% {
+    opacity: 0.97;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crt-fx {
+    animation: none;
+  }
+  .crt[data-phase='crtStarting'] .crt-startup {
+    display: none;
+  }
+}

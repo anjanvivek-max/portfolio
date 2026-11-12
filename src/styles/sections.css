@@ -1,0 +1,659 @@
+/*
+ * Section content. The markup is shared by the standard page, the television and the
+ * object panels; each context sets a theme class that only changes these variables.
+ */
+
+.theme-paper {
+  --fg: #2a2118;
+  --muted: #645545;
+  --accent: #a8461f;
+  --accent-2: #4f552c;
+  --line: #d8c8a8;
+  --card: #fbf6ea;
+  --chip-bg: #ecdfc3;
+  --chip-fg: #3b2f22;
+  --field-bg: #fffaf0;
+  --ok: #3d5a2a;
+  --err: #a02c1c;
+  --focus: #a8461f;
+  --head-font: var(--font-display);
+  --body-font: var(--font-body);
+  --label-font: var(--font-mono);
+  color: var(--fg);
+}
+
+.theme-crt {
+  --fg: #f4ecd8;
+  --muted: #c4b79c;
+  --accent: #ffbb6b;
+  --accent-2: #9ad8cb;
+  --line: rgba(255, 214, 160, 0.24);
+  --card: rgba(255, 222, 176, 0.07);
+  --chip-bg: rgba(255, 187, 107, 0.13);
+  --chip-fg: #ffdfb5;
+  --field-bg: rgba(0, 0, 0, 0.35);
+  --ok: #a9e6a0;
+  --err: #ff9d8a;
+  --focus: #ffbb6b;
+  --head-font: var(--font-crt);
+  --body-font: var(--font-body);
+  --label-font: var(--font-mono);
+  color: var(--fg);
+}
+
+.theme-terminal {
+  --fg: #c9f7c0;
+  --muted: #86c089;
+  --accent: #8dff93;
+  --accent-2: #ffd27a;
+  --line: rgba(141, 255, 147, 0.28);
+  --card: rgba(141, 255, 147, 0.05);
+  --chip-bg: rgba(141, 255, 147, 0.1);
+  --chip-fg: #c9f7c0;
+  --field-bg: rgba(0, 0, 0, 0.35);
+  --ok: #8dff93;
+  --err: #ffab91;
+  --focus: #8dff93;
+  --head-font: var(--font-crt);
+  --body-font: var(--font-mono);
+  --label-font: var(--font-mono);
+  color: var(--fg);
+}
+
+/* ---------- generic section ---------- */
+
+.sec {
+  font-family: var(--body-font);
+  color: var(--fg);
+}
+
+.sec > * + * {
+  margin-top: 0.9em;
+}
+
+.sec-head {
+  margin-bottom: 0.4em;
+}
+
+.sec-kicker {
+  font-family: var(--label-font);
+  font-size: 0.78em;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.sec-title {
+  font-family: var(--head-font);
+  font-weight: 560;
+  font-size: 2.1em;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin-top: 0.15em;
+  text-wrap: balance;
+}
+
+.theme-crt .sec-title,
+.theme-terminal .sec-title {
+  font-weight: 400;
+  font-size: 2.7em;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.sec-lead {
+  font-size: 1.14em;
+  line-height: 1.5;
+  color: var(--fg);
+  max-width: 62ch;
+}
+
+.sec p {
+  max-width: 70ch;
+}
+
+.sec-sub {
+  font-family: var(--label-font);
+  font-size: 0.8em;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 1.9em !important;
+  padding-top: 1.1em;
+  border-top: 1px solid var(--line);
+}
+
+.sec-sub.small {
+  border-top: 0;
+  padding-top: 0;
+  margin-top: 1.2em !important;
+}
+
+.sec-sub .tag {
+  display: inline-block;
+  margin-left: 0.6em;
+  padding: 0.1em 0.6em;
+  border: 1px dashed var(--accent);
+  border-radius: 99px;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+  font-weight: 500;
+  text-transform: none;
+}
+
+/* ---------- chips ---------- */
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45em;
+}
+
+.chip {
+  font-family: var(--label-font);
+  font-size: 0.82em;
+  line-height: 1.3;
+  padding: 0.34em 0.75em;
+  border-radius: 6px;
+  background: var(--chip-bg);
+  color: var(--chip-fg);
+  border: 1px solid var(--line);
+}
+
+/* ---------- cards ---------- */
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.15em 1.25em;
+}
+
+.card > * + * {
+  margin-top: 0.7em;
+}
+
+.card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1em;
+}
+
+.card-title {
+  font-family: var(--body-font);
+  font-size: 1.08em;
+  font-weight: 650;
+  line-height: 1.3;
+}
+
+.card-note {
+  color: var(--muted);
+  font-size: 0.92em;
+  margin-top: 0.15em;
+}
+
+.badge {
+  flex: none;
+  font-family: var(--label-font);
+  font-size: 0.82em;
+  padding: 0.25em 0.7em;
+  border-radius: 99px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15.5em, 1fr));
+  gap: 0.9em;
+}
+
+.skill-card {
+  border-top: 3px solid var(--accent);
+}
+
+.skill-card:nth-child(2n) {
+  border-top-color: var(--accent-2);
+}
+
+/* ---------- facts ---------- */
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6em 2.2em;
+  margin-top: 1.3em;
+}
+
+.facts dt {
+  font-family: var(--label-font);
+  font-size: 0.72em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.facts dd {
+  font-size: 1.05em;
+  font-weight: 600;
+}
+
+/* ---------- lists ---------- */
+
+.tick-list li,
+.plain-bullets li {
+  position: relative;
+  padding-left: 1.4em;
+}
+
+.tick-list li + li,
+.plain-bullets li + li,
+.step-list li + li {
+  margin-top: 0.4em;
+}
+
+.tick-list li::before {
+  content: '';
+  position: absolute;
+  left: 0.1em;
+  top: 0.48em;
+  width: 0.62em;
+  height: 0.34em;
+  border-left: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+  transform: rotate(-45deg);
+}
+
+.plain-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0.25em;
+  top: 0.68em;
+  width: 0.42em;
+  height: 0.42em;
+  border-radius: 50%;
+  border: 1.5px solid var(--muted);
+}
+
+.step-list {
+  counter-reset: step;
+}
+
+.step-list li {
+  counter-increment: step;
+  position: relative;
+  padding-left: 2.4em;
+  max-width: 70ch;
+}
+
+.step-list li::before {
+  content: counter(step, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  font-family: var(--label-font);
+  font-size: 0.82em;
+  color: var(--accent);
+}
+
+.plain-list li {
+  display: flex;
+  flex-direction: column;
+  padding: 0.6em 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.plain-list li span {
+  color: var(--muted);
+  font-size: 0.93em;
+}
+
+/* ---------- project ---------- */
+
+.project-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17em, 1fr));
+  gap: 0 2.2em;
+}
+
+.project-cols section > * + * {
+  margin-top: 0.7em;
+}
+
+.notice {
+  border: 1px solid var(--accent);
+  border-left-width: 4px;
+  border-radius: 6px;
+  padding: 0.8em 1em;
+  background: var(--card);
+  max-width: none !important;
+}
+
+.flow {
+  margin-top: 0.9em;
+}
+
+.flow-steps {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0.45em;
+}
+
+.flow-step {
+  flex: 1 1 8.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+  padding: 0.75em 0.85em;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+  font-size: 0.9em;
+  line-height: 1.35;
+}
+
+.flow-step strong {
+  font-weight: 650;
+}
+
+.flow-step span:last-child {
+  color: var(--muted);
+  font-size: 0.92em;
+}
+
+.flow-index {
+  font-family: var(--label-font);
+  font-size: 0.78em;
+  color: var(--accent);
+}
+
+.flow-arrow {
+  flex: none;
+  display: flex;
+  align-items: center;
+  color: var(--accent);
+}
+
+.flow figcaption,
+.shot figcaption {
+  margin-top: 0.5em;
+  font-size: 0.85em;
+  color: var(--muted);
+}
+
+.shot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13em, 1fr));
+  gap: 0.9em;
+  margin-top: 0.9em;
+}
+
+.shot img {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+}
+
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1em;
+  aspect-ratio: 16 / 10;
+  border: 1.5px dashed var(--line);
+  border-radius: 8px;
+  color: var(--muted);
+  font-family: var(--label-font);
+  font-size: 0.82em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: repeating-linear-gradient(135deg, transparent 0 10px, var(--card) 10px 20px);
+}
+
+.placeholder small {
+  font-size: 0.85em;
+  opacity: 0.85;
+}
+
+.pending {
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ---------- certificates ---------- */
+
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14.5em, 1fr));
+  gap: 0.9em;
+}
+
+.cert-card .cert-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.sec-block {
+  margin-top: 1.6em !important;
+}
+
+/* ---------- links and buttons ---------- */
+
+.text-link {
+  color: var(--accent);
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+  overflow-wrap: anywhere;
+}
+
+.text-link:hover {
+  text-decoration-thickness: 2px;
+}
+
+.button,
+.button-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.62em 1.15em;
+  border-radius: 8px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--btn-fg, #fff8ea);
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.15s var(--ease), filter 0.15s;
+}
+
+.theme-crt .button,
+.theme-crt .button-link,
+.theme-terminal .button,
+.theme-terminal .button-link {
+  --btn-fg: #1b1208;
+}
+
+.button:hover,
+.button-link:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.link-button {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* ---------- contact ---------- */
+
+.contact-list li {
+  display: grid;
+  grid-template-columns: 6.5em 1fr;
+  gap: 1em;
+  padding: 0.6em 0;
+  border-bottom: 1px solid var(--line);
+  align-items: baseline;
+}
+
+.contact-key {
+  font-family: var(--label-font);
+  font-size: 0.75em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.contact-form {
+  margin-top: 0.9em;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8em 1em;
+}
+
+.field-grid .field:nth-child(3),
+.field-wide {
+  grid-column: 1 / -1;
+}
+
+.field label {
+  display: block;
+  font-family: var(--label-font);
+  font-size: 0.75em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.3em;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 0.6em 0.75em;
+  border-radius: 7px;
+  border: 1px solid var(--line);
+  background: var(--field-bg);
+  color: var(--fg);
+  resize: vertical;
+}
+
+.field input:focus-visible,
+.field textarea:focus-visible {
+  outline-offset: 1px;
+  border-color: var(--accent);
+}
+
+.field.has-error input,
+.field.has-error textarea {
+  border-color: var(--err);
+}
+
+.field-error {
+  color: var(--err);
+  font-size: 0.86em;
+  margin-top: 0.3em;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6em 1em;
+  margin-top: 1em;
+}
+
+.form-hint {
+  color: var(--muted);
+  font-size: 0.86em;
+}
+
+.form-status {
+  margin-top: 0.8em;
+  min-height: 1.2em;
+}
+
+.status-ok {
+  color: var(--ok);
+  border-left: 3px solid var(--ok);
+  padding-left: 0.8em;
+}
+
+.status-ok p + p {
+  margin-top: 0.4em;
+}
+
+.status-error {
+  color: var(--err);
+  border-left: 3px solid var(--err);
+  padding-left: 0.8em;
+}
+
+/* ---------- notebook note ---------- */
+
+.note {
+  font-family: var(--font-hand);
+  font-size: 1.55em;
+  line-height: 1.5;
+  color: #2b2a4a;
+}
+
+.note p {
+  max-width: none;
+}
+
+.note > * + * {
+  margin-top: 0.5em;
+}
+
+.note-first {
+  font-size: 1.25em;
+  font-weight: 700;
+}
+
+.note-sign {
+  text-align: right;
+  font-size: 1.3em;
+  font-weight: 700;
+  color: #7a2f17;
+  transform: rotate(-3deg);
+}
+
+@media (max-width: 560px) {
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+  .contact-list li {
+    grid-template-columns: 1fr;
+    gap: 0.1em;
+  }
+  .flow-steps {
+    flex-direction: column;
+  }
+  .flow-arrow {
+    justify-content: center;
+    transform: rotate(90deg);
+  }
+  .card-row {
+    flex-direction: column;
+    gap: 0.5em;
+  }
+}
